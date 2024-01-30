@@ -207,36 +207,65 @@ MANGO_COMMAND_TO_SUBMIT_JOB = mpiexec -n NUM_PROCS --mca btl_base_warn_component
 # an artifact of using mpi on the travis virtual machine.
 
 #####################################################################
-# Generic Ubuntu (assumes 18.04 LTS)
+# Generic Ubuntu (assumes 18.04 or 20.04 LTS)
 #####################################################################
 else ifeq ($(shell lsb_release -si),Ubuntu)
 MANGO_HOST = ubuntu
+MANGO_DIR = /mnt/d/wsl/code/ubuntu20/mango
 
-MANGO_PETSC_AVAILABLE = F
-MANGO_HOPSPACK_AVAILABLE = F
 MANGO_NLOPT_AVAILABLE = T
 MANGO_GSL_AVAILABLE = T
-MANGO_DAKOTA_AVAILABLE = F
 MANGO_EIGEN_AVAILABLE = T
+MANGO_PETSC_AVAILABLE = T
+MANGO_HOPSPACK_AVAILABLE = F
+MANGO_DAKOTA_AVAILABLE = F
+
+# This next parameter matters only if MANGO_PETSC_AVAILABLE == T
+MANGO_LOCAL_PETSC = T
 
 CC = mpicxx
 FC = mpif90
 CLINKER = $(CC)
-FLINKER = $(CC)
-EXTRA_C_COMPILE_FLAGS = -O0
-EXTRA_F_COMPILE_FLAGS = -ffree-line-length-none -O0
+FLINKER = $(FC)
+EXTRA_C_COMPILE_FLAGS = -O0 -g 
+EXTRA_F_COMPILE_FLAGS = -O0 -g -ffree-line-length-none
+
+ifeq ($(MANGO_PETSC_AVAILABLE),T)
+    ifeq ($(MANGO_LOCAL_PETSC),T)
+		PETSC_DIR = /usr/lib/petsc
+		PETSC_ARCH = 
+	else	
+		PETSC_DIR = /mnt/d/wsl/code/ubuntu20/mango/external_packages/petsc-v3.16.6
+		PETSC_ARCH = arch-linux-c-debug
+	endif
+	include ${PETSC_DIR}/${PETSC_ARCH}/lib/petsc/conf/petscvariables
+	EXTRA_C_COMPILE_FLAGS += -I${PETSC_DIR}/include -I${PETSC_DIR}/${PETSC_ARCH}/include
+	EXTRA_F_COMPILE_FLAGS += -I${PETSC_DIR}/include
+	EXTRA_LINK_FLAGS += -L$(PETSC_DIR)/lib -lpetsc
+endif
 
 ifeq ($(MANGO_NLOPT_AVAILABLE),T)
-EXTRA_LINK_FLAGS += -lnlopt
+	EXTRA_C_COMPILE_FLAGS += -I$(MANGO_DIR)/external_packages/nlopt/nlopt-2.6.1/install/include
+	EXTRA_LINK_FLAGS += -L$(MANGO_DIR)/external_packages/nlopt/nlopt-2.6.1/install/lib -lnlopt
 endif
 
 ifeq ($(MANGO_GSL_AVAILABLE),T)
-EXTRA_LINK_FLAGS += -lgsl -lgslcblas
+	EXTRA_LINK_FLAGS += -lgsl -lgslcblas
 endif
 
-EXTRA_C_LINK_FLAGS = $(EXTRA_LINK_FLAGS) -lgfortran
-#EXTRA_F_LINK_FLAGS = $(EXTRA_LINK_FLAGS)
-EXTRA_F_LINK_FLAGS = $(EXTRA_C_LINK_FLAGS) -lmpi_mpifh
+ifeq ($(MANGO_EIGEN_AVAILABLE),T)
+	EXTRA_C_COMPILE_FLAGS += -I/external_packages/eigen/eigen-3.3.7
+endif
+
+EXTRA_C_LINK_FLAGS = $(EXTRA_LINK_FLAGS) -lpthread -lmpi_cxx
+EXTRA_F_LINK_FLAGS = $(EXTRA_LINK_FLAGS) -lpthread -lmpi_cxx
+
+# Catch2 requires the -std=c++11 flag
+EXTRA_C_COMPILE_FLAGS += -std=c++11
+
+# For batch systems, set the following variable to the command used to run jobs. 
+# This variable is used by 'make test'.
+MANGO_COMMAND_TO_SUBMIT_JOB = mpiexec -n NUM_PROCS
 
 #####################################################################
 # Matt's laptop, with mpi and petsc via macports
@@ -299,7 +328,7 @@ EXTRA_C_LINK_FLAGS += -L/opt/local/lib -lgsl -lgslcblas
 EXTRA_F_LINK_FLAGS += -L/opt/local/lib -lgsl -lgslcblas
 endif
 
-EXTRA_C_COMPILE_FLAGS += -I external_packages/eigen/eigen-3.3.7
+EXTRA_C_COMPILE_FLAGS += -I/external_packages/eigen/eigen-3.3.7
 
 # For batch systems, set the following variable to the command used to run jobs. This variable is used by 'make test'.
 MANGO_COMMAND_TO_SUBMIT_JOB = mpiexec -n NUM_PROCS
