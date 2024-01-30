@@ -235,7 +235,7 @@ ifeq ($(MANGO_PETSC_AVAILABLE),T)
 		PETSC_DIR = /usr/lib/petsc
 		PETSC_ARCH = 
 	else	
-		PETSC_DIR = /mnt/d/wsl/code/ubuntu20/mango/external_packages/petsc-v3.16.6
+		PETSC_DIR = $(MANGO_DIR)/external_packages/petsc-v3.16.6
 		PETSC_ARCH = arch-linux-c-debug
 	endif
 	include ${PETSC_DIR}/${PETSC_ARCH}/lib/petsc/conf/petscvariables
