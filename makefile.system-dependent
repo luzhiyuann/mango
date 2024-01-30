@@ -254,7 +254,7 @@ ifeq ($(MANGO_GSL_AVAILABLE),T)
 endif
 
 ifeq ($(MANGO_EIGEN_AVAILABLE),T)
-	EXTRA_C_COMPILE_FLAGS += -I/external_packages/eigen/eigen-3.3.7
+	EXTRA_C_COMPILE_FLAGS += -I$(MANGO_DIR)/external_packages/eigen/eigen-3.3.7
 endif
 
 EXTRA_C_LINK_FLAGS = $(EXTRA_LINK_FLAGS) -lpthread -lmpi_cxx
