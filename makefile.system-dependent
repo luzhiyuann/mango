@@ -211,7 +211,7 @@ MANGO_COMMAND_TO_SUBMIT_JOB = mpiexec -n NUM_PROCS --mca btl_base_warn_component
 #####################################################################
 else ifeq ($(shell lsb_release -si),Ubuntu)
 MANGO_HOST = ubuntu
-MANGO_DIR = /mnt/d/wsl/code/ubuntu20/mango
+MANGO_DIR = /mnt/d/wsl/code/mango
 
 MANGO_NLOPT_AVAILABLE = T
 MANGO_GSL_AVAILABLE = T
