@@ -24,7 +24,7 @@ MANGO is being developed as part of the [Collaboration on Hidden Symmetries and 
 # Compile instruction for Ubuntu system
 
 Steps:
-  1. git clone https://github.com/luzhiyuann/mango.git,
+  1. git clone https://github.com/luzhiyuann/mango.git
   2. cd mango
   4. cd /external_external_packages
   5. ./install_nlopt.sh and sudo apt install libnlopt-dev
