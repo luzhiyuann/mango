@@ -25,19 +25,19 @@ MANGO is being developed as part of the [Collaboration on Hidden Symmetries and 
 
 Steps:
   1. git clone https://github.com/luzhiyuann/mango.git
-  2. cd mango
-  4. cd /external_external_packages
-  5. ./install_nlopt.sh and sudo apt install libnlopt-dev
-  6. ./install_catch2.sh
-  7. ./install_eigen.sh
-  8. sudo apt install libgsl-dev
-  9. sudo apt install petsc-dev
-  10. cd ..
-  11. make -j n
+  2. cd mango/external_external_packages
+  3. ./install_nlopt.sh and sudo apt install libnlopt-dev
+  4. ./install_catch2.sh
+  5. ./install_eigen.sh
+  6. sudo apt install libgsl-dev
+  7. sudo apt install petsc-dev
+  8. cd ..
+  9. make -j n
 
 Notes:
-  1. if the compile process outputs: warning: Clock skew detected. Your build may be incomplete.
-     1.1 find . -type f | xargs touch   # in the mango directory
-     1.2 make clean
-     1.3 make -j n
-  2. The Parallel compilers of STELLOPT and MANGO library should keep consistent.
+  1. users should modify the MANGO_DIR in # Generic Ubuntu (assumes 18.04 or 20.04 LTS) # part of makefile.system-dependent to the practical direction.
+  2. if the compile process outputs # warning: Clock skew detected. Your build may be incomplete #, execute the following instructions.
+     2.1 find . -type f | xargs touch   # in the mango directory
+     2.2 make clean
+     2.3 make -j n
+  3. The Parallel compilers of STELLOPT and MANGO library should keep consistent.
