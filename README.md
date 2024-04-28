@@ -35,7 +35,7 @@ Steps:
   9. make -j n
 
 Notes:
-  1. users should modify the MANGO_DIR in Generic Ubuntu part of [makefile.system-dependent](https://github.com/luzhiyuann/mango/blob/master/makefile.system-dependent) to the practical direction.
+  1. users should modify the MANGO_DIR in [Generic Ubuntu](https://github.com/luzhiyuann/mango/blob/ed83376e9503342b0ba1f10acc134f8c2c226659/makefile.system-dependent#L214) of [makefile.system-dependent](https://github.com/luzhiyuann/mango/blob/master/makefile.system-dependent) to the practical direction.
   2. if the compile process outputs # warning: Clock skew detected. Your build may be incomplete #, execute the following instructions in the mango directory.  
      2.1 find . -type f | xargs touch  
      2.2 make clean  
