@@ -20,3 +20,5 @@ making them parallel by providing parallelized finite-difference gradient calcul
 * For reliability, MANGO includes unit tests, integrated tests, regression tests, and continuous integration.
 
 MANGO is being developed as part of the [Collaboration on Hidden Symmetries and Fusion Energy](https://hiddensymmetries.princeton.edu/). This work is supported by a grant from the Simons Foundation (560651, M.L.).
+
+# Compile instruction
