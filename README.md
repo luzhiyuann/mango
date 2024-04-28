@@ -40,4 +40,4 @@ Notes:
      2.1 find . -type f | xargs touch  
      2.2 make clean  
      2.3 make -j n  
-  4. The Parallel compilers of STELLOPT and MANGO library should keep consistent.
+  3. The parallel compilers of STELLOPT and MANGO library should keep consistent.
