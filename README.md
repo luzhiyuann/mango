@@ -21,4 +21,16 @@ making them parallel by providing parallelized finite-difference gradient calcul
 
 MANGO is being developed as part of the [Collaboration on Hidden Symmetries and Fusion Energy](https://hiddensymmetries.princeton.edu/). This work is supported by a grant from the Simons Foundation (560651, M.L.).
 
-# Compile instruction
+# Compile instruction for Ubuntu system
+  1. git clone https://github.com/luzhiyuann/mango.git
+  2. cd mango
+  3. find ./ -type f |xargs touch
+  4. cd /external_external_packages
+  5. ./install_nlopt.sh and sudo apt install libnlopt-dev
+  6. ./install_catch2.sh
+  7. ./install_eigen.sh
+  8. sudo apt install libgsl-dev
+  9. sudo apt install petsc-dev
+  10. cd ..
+  11. make -j n
+  12. 
