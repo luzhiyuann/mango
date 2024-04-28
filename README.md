@@ -36,8 +36,8 @@ Steps:
 
 Notes:
   1. users should modify the MANGO_DIR in # Generic Ubuntu (assumes 18.04 or 20.04 LTS) # part of makefile.system-dependent to the practical direction.
-  2. if the compile process outputs # warning: Clock skew detected. Your build may be incomplete #, execute the following instructions.
-     2.1 find . -type f | xargs touch   # in the mango directory
+  2. if the compile process outputs # warning: Clock skew detected. Your build may be incomplete #, execute the following instructions in the mango directory.
+     2.1 find . -type f | xargs touch
      2.2 make clean
      2.3 make -j n
-  3. The Parallel compilers of STELLOPT and MANGO library should keep consistent.
+  4. The Parallel compilers of STELLOPT and MANGO library should keep consistent.
