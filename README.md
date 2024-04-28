@@ -22,9 +22,10 @@ making them parallel by providing parallelized finite-difference gradient calcul
 MANGO is being developed as part of the [Collaboration on Hidden Symmetries and Fusion Energy](https://hiddensymmetries.princeton.edu/). This work is supported by a grant from the Simons Foundation (560651, M.L.).
 
 # Compile instruction for Ubuntu system
-  1. git clone https://github.com/luzhiyuann/mango.git
+
+Steps:
+  1. git clone https://github.com/luzhiyuann/mango.git,
   2. cd mango
-  3. find ./ -type f |xargs touch
   4. cd /external_external_packages
   5. ./install_nlopt.sh and sudo apt install libnlopt-dev
   6. ./install_catch2.sh
@@ -33,4 +34,10 @@ MANGO is being developed as part of the [Collaboration on Hidden Symmetries and 
   9. sudo apt install petsc-dev
   10. cd ..
   11. make -j n
-  12. 
+
+Notes:
+  1. if the compile process outputs: warning: Clock skew detected. Your build may be incomplete.
+     1.1 find . -type f | xargs touch   # in the mango directory
+     1.2 make clean
+     1.3 make -j n
+  2. The Parallel compilers of STELLOPT and MANGO library should keep consistent.
